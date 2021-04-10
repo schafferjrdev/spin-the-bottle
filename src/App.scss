@@ -13,6 +13,7 @@
   cursor: pointer;
   z-index: 1000;
   transform: rotate(90deg);
+  opacity: 0.85;
 }
 
 .rotate {
@@ -52,7 +53,7 @@
   align-items: center;
   .people {
     margin: 0 1vw;
-    font-size: 7vw;
+    font-size: calc(25px + 4vw);
     text-transform: uppercase;
   }
 }
@@ -66,9 +67,17 @@
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1024px) {
+  .group {
+    .people {
+      font-size: calc(25px + 3vw);
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
   .bottle {
-    height: 40vmin;
+    height: 30vh;
     cursor: pointer;
     z-index: 1000;
     transform: rotate(180deg);
