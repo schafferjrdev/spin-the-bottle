@@ -19,6 +19,21 @@
   animation: App-logo-spin infinite 0.5s linear;
 }
 
+.people-tags {
+  margin: 8px 0;
+}
+
+.floated {
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+  z-index: 2000;
+}
+
+.tag-name {
+  text-transform: uppercase;
+}
+
 .group {
   width: 100vw;
   height: 100vh;

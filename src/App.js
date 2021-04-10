@@ -3,13 +3,17 @@ import logo from "./bottle.png";
 import spin from "./bottle.mp3";
 import _ from "lodash";
 import "./App.scss";
-import { Modal, Input, Button } from "antd";
+import { Modal, Input, Button, Tag } from "antd";
 
 function App() {
   const [rotate, setRotate] = useState(false);
   const [people, setPeople] = useState([]);
   const [selected, setSelected] = useState([]);
   const [input, setInput] = useState("");
+  const [disabled, setDisabled] = useState(true);
+  const [currentPeople, setCurrentPeople] = useState([]);
+  const [opened, setOpened] = useState(true);
+
   const audio = new Audio(spin);
 
   const handleClick = () => {
@@ -24,40 +28,71 @@ function App() {
     }
   };
 
+  const splitText = (text) => {
+    let str = text.replace(/\s+/gim, "").trim();
+    str = str.replace(/\W+/gim, ",");
+    return _.compact(str.split(","));
+  };
+
   const handleOk = () => {
-    let str = input.replace(/\s+/gim, "").trim();
-    if (str.includes(";")) {
-      str = str.replace(/\W+/gim, ",");
-    }
-    setPeople(str.split(","));
+    setPeople(splitText(input));
+    setOpened(false);
   };
 
   const handleChange = (e) => {
+    setCurrentPeople(splitText(e.target.value));
+
+    const pattern = /\w+\W+\w+/gim;
+    setDisabled(!Boolean(e.target.value.match(pattern)));
     setInput(e.target.value);
+  };
+
+  const handleEnter = (e) => {
+    if (e.key === "Enter" && !disabled) handleOk();
+  };
+
+  const handleClose = () => {
+    if (!disabled) setOpened(false);
   };
 
   return (
     <div className="App">
-      {people.length === 0 && (
-        <Modal
-          title="Add peoples name separated by , . ;  or /"
-          visible={true}
-          footer={[
-            <Button
-              type="primary"
-              onClick={handleOk}
-              disabled={input.length <= 0}
-            >
-              Ok
-            </Button>,
-          ]}
-        >
-          <Input value={input} onChange={handleChange} />
-        </Modal>
-      )}
+      <Modal
+        title="Add peoples name separated by , . ;  or /"
+        visible={opened}
+        onCancel={handleClose}
+        closable={people.length > 0}
+        footer={[
+          <Button type="primary" onClick={handleOk} disabled={disabled}>
+            Ok
+          </Button>,
+        ]}
+      >
+        <div className="people-tags">
+          {currentPeople.map((n, i) => (
+            <Tag className="tag-name" key={i}>
+              {n}
+            </Tag>
+          ))}
+        </div>
+        <Input value={input} onChange={handleChange} onKeyDown={handleEnter} />
+      </Modal>
+      <div className="people-tags floated" onClick={() => setOpened(true)}>
+        {people.map((n, i) => (
+          <Tag
+            color={selected.includes(n) ? "green" : "red"}
+            key={i}
+            className="tag-name"
+          >
+            {n}
+          </Tag>
+        ))}
+      </div>
       <div className="group">
         {selected.map((p) => (
-          <span className="people">{p}</span>
+          <span key={`people_${p}`} className="people">
+            {p}
+          </span>
         ))}
       </div>
       <img
