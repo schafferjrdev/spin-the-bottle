@@ -1,5 +1,6 @@
 import { useState } from "react";
 import logo from "./bottle.png";
+import spin from "./bottle.mp3";
 import _ from "lodash";
 import "./App.scss";
 import { Modal, Input, Button } from "antd";
@@ -9,15 +10,17 @@ function App() {
   const [people, setPeople] = useState([]);
   const [selected, setSelected] = useState([]);
   const [input, setInput] = useState("");
+  const audio = new Audio(spin);
 
   const handleClick = () => {
     if (!rotate) {
       setRotate(true);
       setSelected([]);
+      audio.play();
       setTimeout(() => {
         setRotate(false);
         setSelected(_.sampleSize(people, 2));
-      }, 1000);
+      }, 2000);
     }
   };
 
