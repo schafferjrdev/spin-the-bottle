@@ -29,8 +29,11 @@ function App() {
   };
 
   const splitText = (text) => {
-    let str = text.replace(/\s+/gim, "").trim();
-    str = str.replace(/\W+/gim, ",");
+    let str = text.trim();
+    str = str
+      .replace(/[.,;/\\]+/gim, ",")
+      .replace(/\s{2,}/gim, " ")
+      .replace(/\B\s+\B/gim, "");
     return _.compact(str.split(","));
   };
 
@@ -70,7 +73,7 @@ function App() {
       >
         <div className="people-tags">
           {currentPeople.map((n, i) => (
-            <Tag className="tag-name" key={i}>
+            <Tag className="tag-name" key={`tag_name_${i}`}>
               {n}
             </Tag>
           ))}
@@ -81,7 +84,7 @@ function App() {
         {people.map((n, i) => (
           <Tag
             color={selected.includes(n) ? "green" : "red"}
-            key={i}
+            key={`tag_name_people_${i}`}
             className="tag-name"
           >
             {n}
