@@ -1,0 +1,45 @@
+.App {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.bottle {
+  height: 40vmin;
+  cursor: pointer;
+  z-index: 1000;
+  transform: rotate(90deg);
+}
+
+.rotate {
+  animation: App-logo-spin infinite 0.5s linear;
+}
+
+.group {
+  width: 100vw;
+  height: 100vh;
+  color: #eee;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .people {
+    margin: 0 1vw;
+    font-size: 7vw;
+    text-transform: uppercase;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(90deg);
+  }
+  to {
+    transform: rotate(900deg);
+  }
+}
