@@ -16,7 +16,7 @@
 }
 
 .rotate {
-  animation: App-logo-spin infinite 0.5s linear;
+  animation: App-logo-spin 1 2s cubic-bezier(0.39, 0.58, 0.57, 1);
 }
 
 .people-tags {
@@ -62,7 +62,7 @@
     transform: rotate(90deg);
   }
   to {
-    transform: rotate(900deg);
+    transform: rotate(2970deg);
   }
 }
 
@@ -76,10 +76,10 @@
 
   @keyframes App-logo-spin {
     from {
-      transform: rotate(0deg);
+      transform: rotate(180deg);
     }
     to {
-      transform: rotate(720deg);
+      transform: rotate(3420deg);
     }
   }
 
