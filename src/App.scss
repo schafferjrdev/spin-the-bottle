@@ -21,6 +21,13 @@
 
 .people-tags {
   margin: 8px 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  span {
+    margin: 8px;
+  }
 }
 
 .floated {
@@ -56,5 +63,30 @@
   }
   to {
     transform: rotate(900deg);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .bottle {
+    height: 40vmin;
+    cursor: pointer;
+    z-index: 1000;
+    transform: rotate(180deg);
+  }
+
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(720deg);
+    }
+  }
+
+  .group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
   }
 }
